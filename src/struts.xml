@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>	
+    <constant name="struts.multipart.saveDir" value="files" />
+    <package name="dragndrop" namespace="" extends="struts-default">		
+
+            <default-action-ref name="getfiles" />
+
+            <action name="getfiles" class="com.ibm.dragndrop.action.FilesAction" method="getFiles">
+                <result name="success">index.jsp</result>            
+            </action>        
+            
+            <action name="downloadfile" class="com.ibm.dragndrop.action.FilesAction" method="downloadFile">
+                <result name="success" type="stream">
+                        <param name="contentDisposition">attachment;filename=${fileName}</param>
+                         <param name="contentType">application/octet-stream</param>
+                        <param name="inputName">inputStream</param>
+                        <param name="bufferSize">1024</param>
+                </result>
+            </action>
+            
+            <action name="uploadfile" class="com.ibm.dragndrop.action.FilesAction" method="uploadFile">
+                <result name="success">index.jsp</result>
+            </action>
+            
+            
+            
+    </package>
+
+</struts>
